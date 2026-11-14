@@ -52,17 +52,13 @@ Kelas : PBP C
 
    Situasi di mana _hot reload_ saja tidak cukup, dan harus melakukan _hot restart_ atau _full restart_ adalah sebagai berikut.
 
-   - Suatu app terhenti/mati
-      Misal karena aplikasi terlalu lama dibiarkan di _background_.
+   - **Suatu app terhenti/mati**: Misal karena aplikasi terlalu lama dibiarkan di _background_.
    
-   - Perubahan pada `builder` milik `CupertinoTabView`
-      Melakukan _hot reload_ tidak cukup untuk menyimpan perubahan pada `builder` milik `CupertinoTabView`.
+   - **Perubahan pada `builder` milik `CupertinoTabView`**: Melakukan _hot reload_ tidak cukup untuk menyimpan perubahan pada `builder` milik `CupertinoTabView`.
    
-   - Perubahan pada _Enumerated Types_
-      Melakukan _hot reload_ tidak cukup untuk menyimpan perubahan _enumerated type_ menjadi _regular class_ dan sebaliknya.
+   - **Perubahan pada _Enumerated Types_**: Melakukan _hot reload_ tidak cukup untuk menyimpan perubahan _enumerated type_ menjadi _regular class_ dan sebaliknya.
    
-   - Perubahan pada _Generic types_
-     Melakukan _hot reload_ tidak cukup untuk menyimpan perubahan deklarasi tipe _generic_ pada suatu _class_.
+   - **Perubahan pada _Generic types_**: Melakukan _hot reload_ tidak cukup untuk menyimpan perubahan deklarasi tipe _generic_ pada suatu _class_.
 
 
 ## AI USAGE
