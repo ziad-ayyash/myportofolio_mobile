@@ -8,11 +8,11 @@ Kelas : PBP C
 
 ## Tugas 7
 
-1. _Widget tree_ merupakan representasi logis dari semua widget milik UI.
+1. _Widget tree_ merupakan representasi logis dari semua widget milik UI. Hubungan induk-anak _(parent-child)_ antar-widget yaitu sang widget _parent_ akan mewarisi sifatnya ke widget _child_-nya. Mirip seperti DOM _(Document Object Model)_ pada HTML.
 
-2. _Widget_ yang digunakan pada proyek ini beserta fungsinya adalah sebagai berikut.
+2. _Widget_ bawaan yang digunakan pada proyek ini beserta fungsinya adalah sebagai berikut.
    | Widget | Fungsionalitas |
-   | ------ | ------ |
+   | ------ | -------------- |
    | `MaterialApp` | _Root widget_ yang menyediakan _Material Design_ |
    | `Scaffold` | Struktur visual dasar halaman. |
    | `AppBar` | Tampilan bar bagian atas halaman aplikasi. |
@@ -29,6 +29,13 @@ Kelas : PBP C
    | `SnackBar` | Menampilkan pesan saat terjadi _event_ tertentu; di sini saat tombol di tekan. |
    | `Icon` | Menampilkan ikon yang ditentukan. |
    | `Text` | Menampilkan teks yang ditentukan. |
+
+   serta _Widget_ buatan beserta fungsinya adalah sebagai berikut.
+   | Widget | Fungsionalitas |
+   | ------ | -------------- |
+   | `MyHomePage` | UI yang pertama ditampilkan kepada pengguna. |
+   | `InfoCard` | Menampilkan kartu yang berisi informasi seperti nama, npm, dan kelas. |
+   | `ItemCard` | Menampilkan kartu tombol dengan nama, ikon, dan warna tertentu yang menampilkan pesan dengan `SnackBar` ketika dipencet. |
 
 3. _MaterialApp_ adalah suatu widget praktis yang membungkus sejumlah widget yang umumnya diperlukan untuk aplikasi dengan _Material Design_ milik Google. Tak hanya itu, _MaterialApp_ mengkonfigurasi top-level Navigator, dan juga mengkonfigurasi `WidgetsApp.textStyle` miliknya dengan warna merah atau kuning kontras yang bertujuan untuk memberi peringatan pada _developer_ bahwa _app_ mereka belum mendefinisikan _text style default_.
 
