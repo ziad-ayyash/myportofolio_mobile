@@ -53,13 +53,19 @@ Kelas : PBP C
 
    Situasi di mana _hot reload_ saja tidak cukup, dan harus melakukan _hot restart_ atau _full restart_ adalah sebagai berikut.
 
-   - **Suatu app terhenti/mati**: Misal karena aplikasi terlalu lama dibiarkan di _background_.
+   - **App terhenti/mati**: Misal karena aplikasi terlalu lama dibiarkan jalan di _background_.
    
-   - **Perubahan pada `builder` milik `CupertinoTabView`**: Melakukan _hot reload_ tidak cukup untuk menyimpan perubahan pada `builder` milik `CupertinoTabView`.
+   - **Perubahan pada `builder` milik `CupertinoTabView`**: Melakukan _hot reload_ tidak cukup untuk menampakkan perubahan pada `builder` milik `CupertinoTabView`.
    
-   - **Perubahan pada _Enumerated Types_**: Melakukan _hot reload_ tidak cukup untuk menyimpan perubahan _enumerated type_ menjadi _regular class_ dan sebaliknya.
+   - **Perubahan pada _Enumerated Types_**: Melakukan _hot reload_ tidak cukup untuk menampakkan perubahan yang mengganti _enumerated type_ menjadi _regular class_ dan sebaliknya.
    
-   - **Perubahan pada _Generic types_**: Melakukan _hot reload_ tidak cukup untuk menyimpan perubahan deklarasi tipe _generic_ pada suatu _class_.
+   - **Perubahan pada _Generic types_**: Melakukan _hot reload_ tidak cukup untuk menampakkan perubahan yang mengganti deklarasi tipe _generic_ pada suatu _class_.
+
+   - **Perubahan pada _native code_**: Untuk menampakkan perubahan pada _native code_, misal Kotlin, Java, Swift, atau Objective-C, perlu dilakukan _full restart_.
+
+   - **Perubahan pada _Global variables_ & _Static fields_**: _Global variable_ dan _static field_ dianggap bagian dari _state_ aplikasi karena hanya diinisialisasi pada saat Flutter app dijalankan, sehingga perlu dilakukan _hot restart_ atau _full restart_ untuk menampakkan perubahannya.
+
+   - **Perubahan pada kode yang dijalankan pada saat awal eksekusi aplikasi**: Umumnya perubahan pada kode `main()` atau `initState()`; _hot reload_ tidak cukup untuk menampakkan perubahan karena membangun ulang _widget tree_ tidak memanggil ulang kedua method tersebut.
 
 
 ## AI USAGE
