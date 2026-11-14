@@ -33,6 +33,7 @@ Kelas : PBP C
    serta _Widget_ buatan beserta fungsinya adalah sebagai berikut.
    | Widget | Fungsionalitas |
    | ------ | -------------- |
+   | `MyApp` | Membuat root _widget_ `MaterialApp` yang sudah terkonfigurasi. |
    | `MyHomePage` | UI yang pertama ditampilkan kepada pengguna. |
    | `InfoCard` | Menampilkan kartu yang berisi informasi seperti nama, npm, dan kelas. |
    | `ItemCard` | Menampilkan kartu tombol dengan nama, ikon, dan warna tertentu yang menampilkan pesan dengan `SnackBar` ketika dipencet. |
@@ -70,7 +71,7 @@ Tugas ini dikerjakan tanpa menggunakan AI, dengan referensi sebagai berikut.
 - [**Tugas Individu 07**](https://pbp.cs.ui.ac.id/assignments/individual/tugas-7.html) | 
    Referensi cara membuat tombol warna - warni.
 
-- [**Dokumentasi Flutter API**](api.flutter.dev) | 
+- [**Dokumentasi Flutter API**](https://api.flutter.dev) | 
    Referensi untuk menjawab pertanyaan reflektif perihal [fungsionalitas dan cara kerja _widget_](https://api.flutter.dev/flutter/widgets) dan [definisi `BuildContext`](https://api.flutter.dev/flutter/widgets/BuildContext-class.html).
 
 - [**Medium.com**](https://medium.com/@dihsar/understanding-flutter-buildcontext-a-guide-for-developers-367579309f3a) |
