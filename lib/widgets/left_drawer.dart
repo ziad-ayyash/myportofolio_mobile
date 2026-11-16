@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:myportofolio_mobile/menu.dart';
+import 'package:myportofolio_mobile/screens/menu.dart';
+import 'package:myportofolio_mobile/screens/project_form.dart';
 
 // TODO: Impor halaman ProjectFormPage jika sudah dibuat
 
@@ -48,6 +49,10 @@ class LeftDrawer extends StatelessWidget {
             title: const Text('Add Project'),
             // Navigasi ke halaman tambah proyek
             onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProjectFormPage()),
+              );
               /*
               TODO: Buatlah routing ke halaman ProjectFormPage yang akan dibuat nanti.
               */
