@@ -2,8 +2,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
 
-// TODO: Impor halaman ProjectFormPage jika sudah dibuat
-
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
 
@@ -53,9 +51,6 @@ class LeftDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => ProjectFormPage()),
               );
-              /*
-              TODO: Buatlah routing ke halaman ProjectFormPage yang akan dibuat nanti.
-              */
             },
           ),
         ],
