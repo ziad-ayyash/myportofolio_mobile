@@ -65,7 +65,7 @@ Kelas : PBP C
 
    - **Perubahan pada _Global variables_ & _Static fields_**: _Global variable_ dan _static field_ dianggap bagian dari _state_ aplikasi karena hanya diinisialisasi pada saat Flutter app dijalankan, sehingga perlu dilakukan _hot restart_ atau _full restart_ untuk menampakkan perubahannya.
 
-   - **Perubahan pada kode yang dijalankan pada saat awal eksekusi aplikasi**: Umumnya perubahan pada kode `main()` atau `initState()`; _hot reload_ tidak cukup untuk menampakkan perubahan karena membangun ulang _widget tree_ tidak memanggil ulang kedua method tersebut.
+   - **Perubahan pada kode yang dijalankan pada saat awal eksekusi aplikasi**: Umumnya perubahan pada kode `main()` atau `initState()`; _hot reload_ tidak cukup untuk menampakkan perubahan karena membangun ulang _widget tree_ tidak memanggil ulang kedua _method_ tersebut.
 
 
 ## AI USAGE
