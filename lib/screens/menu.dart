@@ -1,4 +1,5 @@
 import 'package:material_ui/material_ui.dart';
+import 'package:myportofolio_mobile/screens/experience_form.dart';
 import 'package:myportofolio_mobile/widgets/project_card.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
@@ -13,6 +14,7 @@ class MyHomePage extends StatelessWidget {
   final List<ItemHomepage> items = [
     ItemHomepage("Lihat Proyek", Icons.folder, Colors.blueAccent),
     ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.deepPurple, (ctx) => ProjectFormPage()),
+    ItemHomepage("Tambah Pengalaman", Icons.add_circle, Colors.green, (ctx) => ExperienceFormPage()),
     ItemHomepage("Logout", Icons.logout, Colors.redAccent),
   ];
 
