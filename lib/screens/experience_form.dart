@@ -26,8 +26,14 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
     'freelance',
   ];
 
-  bool isValidURL(String? url) {
+  bool _isValidURL(String? url) {
     return Uri.parse(url ?? '').isAbsolute;
+  }
+
+  void _resetForm() {
+    _endedAt = null;
+    _category = _categories[0];
+    _formKey.currentState!.reset();
   }
 
   Future<void> _selectDate() async {
@@ -153,7 +159,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                     });
                   },
                   validator: (String? value) {
-                    if (!isValidURL(value)) {
+                    if (!_isValidURL(value)) {
                       return "Thumbnail URL is invalid!";
                     }
                     return null;
@@ -195,7 +201,9 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: const Text('Pengalaman berhasil ditambahkan!'),
+                              title: const Text(
+                                'Pengalaman berhasil ditambahkan!',
+                              ),
                               content: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,7 +221,7 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                                   child: const Text('OK'),
                                   onPressed: () {
                                     Navigator.pop(context);
-                                    _formKey.currentState!.reset();
+                                    _resetForm();
                                   },
                                 ),
                               ],
@@ -226,6 +234,22 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                       "Save",
                       style: TextStyle(color: Colors.white),
                     ),
+                  ),
+                ),
+              ),
+
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: OutlinedButton(
+                    style: ButtonStyle(
+                      foregroundColor: WidgetStateProperty.all(Colors.indigo),
+                    ),
+                    onPressed: () {
+                      _resetForm();
+                    },
+                    child: const Text("Reset"),
                   ),
                 ),
               ),
