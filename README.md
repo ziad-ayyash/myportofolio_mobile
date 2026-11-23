@@ -38,6 +38,9 @@ Tugas ini dikerjakan tanpa menggunakan AI, dengan referensi sebagai berikut.
 - [**Dokumentasi Flutter API**](https://api.flutter.dev/) |
    Referensi untuk [implementasi _field_ waktu](https://api.flutter.dev/flutter/material/showDatePicker.html) pada formulir menggunakan `showDatePicker()`, serta referensi tambahan untuk menjawab pertanyaan reflektif [perihal `GlobalKey`](https://api.flutter.dev/flutter/widgets/GlobalKey-class.html).
 
+- [**StackOverflow**](https://stackoverflow.com/questions/52975739/dart-flutter-validating-a-string-for-url) |
+   Referensi untuk cara memvalidasi URL.
+
 ## PREVIOUS ASSIGNMENTS
 - [Tugas #1](./pertanyaan%20reflektif/tugas01.md)
 - [Tugas #2](./pertanyaan%20reflektif/tugas02.md)
