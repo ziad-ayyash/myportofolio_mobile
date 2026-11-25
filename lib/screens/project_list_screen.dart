@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/models/project.dart';
-//import 'package:myportofolio_mobile/screens/project_detail_screen.dart';
+import 'package:myportofolio_mobile/screens/project_detail_screen.dart';
 import 'package:myportofolio_mobile/services/api_client.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 import 'package:provider/provider.dart';
@@ -114,12 +114,12 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
                   margin: const EdgeInsets.only(bottom: 12),
                   child: InkWell(
                     onTap: () {
-                      /*Navigator.push(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (_) => ProjectDetailScreen(project: project),
                         ),
-                      );*/
+                      );
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,7 +138,7 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
                                       : const Center(
                                           child: CircularProgressIndicator(),
                                         ),
-                                  errorBuilder: (_, __, ___) =>
+                                  errorBuilder: (_, _, _) =>
                                       placeholder(Icons.broken_image),
                                 ),
                         ),
@@ -163,18 +163,13 @@ class _ProjectListScreenState extends State<ProjectListScreen> {
                                   const Icon(Icons.chevron_right),
                                 ],
                               ),
-                              if (project.type != null &&
-                                  project.type!.isNotEmpty) ...[
-                                const SizedBox(height: 4),
-                                Text(
-                                  project.type!,
-                                  style: TextStyle(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primary,
-                                  ),
+                              const SizedBox(height: 4),
+                              Text(
+                                project.type,
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
-                              ],
+                              ),
                               const SizedBox(height: 8),
                               Text(
                                 project.description,

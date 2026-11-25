@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 import 'package:myportofolio_mobile/widgets/auth_guard.dart';
 import 'package:myportofolio_mobile/services/auth_state.dart';
@@ -76,7 +75,9 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
     } on ApiException catch (error) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text("Gagal menambah Proyek: ${error.message}")));
+        ..showSnackBar(
+          SnackBar(content: Text("Gagal menambah Proyek: ${error.message}")),
+        );
       return false;
     } finally {
       setState(() {
@@ -279,44 +280,45 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                       backgroundColor: WidgetStateProperty.all(Colors.indigo),
                     ),
                     onPressed: () async {
-                      bool success = await _submit();
-                      if (success) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Proyek berhasil ditambahkan!'),
-                              content: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Project title: $_title'),
-                                    Text('Description: $_description'),
-                                    Text('Type: $_type'),
-                                    Text('Thumbnail: $_thumbnail'),
-                                    Text('Link: $_link'),
-                                    Text(
-                                      'Maintenance Status: $_maintenanceStatus',
-                                    ),
-                                    Text(
-                                      'Development Status: $_developmentStatus',
-                                    ),
-                                  ],
-                                ),
+                      final success = await _submit();
+
+                      if (!success || !context.mounted) return;
+
+                      showDialog(
+                        context: context,
+                        builder: (dialogContext) {
+                          return AlertDialog(
+                            title: const Text('Proyek berhasil ditambahkan!'),
+                            content: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Project title: $_title'),
+                                  Text('Description: $_description'),
+                                  Text('Type: $_type'),
+                                  Text('Thumbnail: $_thumbnail'),
+                                  Text('Link: $_link'),
+                                  Text(
+                                    'Maintenance Status: $_maintenanceStatus',
+                                  ),
+                                  Text(
+                                    'Development Status: $_developmentStatus',
+                                  ),
+                                ],
                               ),
-                              actions: [
-                                TextButton(
-                                  child: const Text('OK'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    _formKey.currentState!.reset();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
+                            ),
+                            actions: [
+                              TextButton(
+                                child: const Text('OK'),
+                                onPressed: () {
+                                  Navigator.pop(dialogContext);
+                                  _formKey.currentState!.reset();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                     child: const Text(
                       "Save",
