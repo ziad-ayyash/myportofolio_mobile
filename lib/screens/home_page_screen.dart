@@ -1,8 +1,11 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/screens/experience_form.dart';
-import 'package:myportofolio_mobile/widgets/project_card.dart';
+import 'package:myportofolio_mobile/screens/project_list_screen.dart';
+import 'package:myportofolio_mobile/widgets/item_card.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -12,11 +15,49 @@ class MyHomePage extends StatelessWidget {
   final String kelas = "PBP C";
 
   final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Proyek", Icons.folder, Colors.blueAccent),
-    ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.deepPurple, (ctx) => ProjectFormPage()),
-    ItemHomepage("Tambah Pengalaman", Icons.add_circle, Colors.green, (ctx) => ExperienceFormPage()),
-    ItemHomepage("Logout", Icons.logout, Colors.redAccent),
+    ItemHomepage(
+      "Lihat Proyek",
+      Icons.folder,
+      color: Colors.blueAccent,
+      navTarget: (ctx) => ProjectListScreen(),
+    ),
+    ItemHomepage(
+      "Tambah Proyek",
+      Icons.add_circle,
+      color: Colors.deepPurple,
+      navTarget: (ctx) => ProjectFormPage(),
+      loginRequired: true
+    ),
+    ItemHomepage(
+      "Tambah Pengalaman",
+      Icons.add_circle,
+      color: Colors.green,
+      navTarget: (ctx) => ExperienceFormPage(),
+      loginRequired: true
+    ),
+    ItemHomepage(
+      "Logout",
+      Icons.logout,
+      color: Colors.redAccent,
+      action: _logout,
+    ),
   ];
+
+  static void _logout(BuildContext ctx) async {
+    final authState = ctx.read<AuthState>();
+    if (authState.isLoggedIn) {
+      await authState.logout();
+      if (ctx.mounted) {
+        ScaffoldMessenger.of(ctx)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(const SnackBar(content: Text('Logout berhasil.')));
+      }
+    } else {
+      ScaffoldMessenger.of(ctx)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(const SnackBar(content: Text('Login terlebh dahulu.')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +163,9 @@ class ItemHomepage {
   final IconData icon;
   final Color? color;
   final Widget Function(BuildContext)? navTarget;
+  final void Function(BuildContext)? action;
+  final bool loginRequired;
 
-  ItemHomepage(this.name, this.icon, [this.color, this.navTarget]);
+  ItemHomepage(this.name, this.icon, 
+  {this.color, this.navTarget, this.action, this.loginRequired=false});
 }

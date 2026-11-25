@@ -1,5 +1,11 @@
-import 'package:material_ui/material_ui.dart';
+import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
+import 'package:myportofolio_mobile/widgets/auth_guard.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:myportofolio_mobile/services/api_client.dart';
+import 'package:myportofolio_mobile/models/project.dart';
+import 'package:provider/provider.dart';
 
 class ProjectFormPage extends StatefulWidget {
   const ProjectFormPage({super.key});
@@ -18,10 +24,67 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
   String _link = "";
 
   String _maintenanceStatus = "maintained";
-  String _developmentStatus = "in-development";
+  String _developmentStatus = "in_development";
+
+  bool _submitting = false;
 
   final List<String> _maintenanceStatusOptions = ['maintained', 'deprecated'];
-  final List<String> _developmentStatusOptions = ['released', 'in-development'];
+  final List<String> _developmentStatusOptions = ['released', 'in_development'];
+
+  Future<bool> _submit() async {
+    if (_submitting || !_formKey.currentState!.validate()) return false;
+
+    final loggedIn = await ensureLoggedIn(context);
+    if (!loggedIn || !mounted) {
+      return false;
+    }
+
+    setState(() {
+      _submitting = true;
+    });
+
+    try {
+      final authState = context.read<AuthState>();
+      final token = authState.token;
+
+      if (token == null || token.isEmpty) {
+        if (!mounted) return false;
+
+        final loggedIn = await ensureLoggedIn(context);
+        if (!loggedIn || !mounted) return false;
+      }
+
+      final activeToken = context.read<AuthState>().token;
+      if (activeToken == null || activeToken.isEmpty) return false;
+
+      final project = Project(
+        title: _title,
+        description: _description,
+        thumbnail: _thumbnail,
+        type: _type,
+        link: _link,
+        maintenanceStatus: _maintenanceStatus,
+        developmentStatus: _developmentStatus,
+      );
+
+      await context.read<ApiClient>().createProject(
+        project,
+        token: activeToken,
+      );
+
+      if (!mounted) return false;
+    } on ApiException catch (error) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(SnackBar(content: Text("Gagal menambah Proyek: ${error.message}")));
+      return false;
+    } finally {
+      setState(() {
+        _submitting = false;
+      });
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -215,8 +278,9 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                     style: ButtonStyle(
                       backgroundColor: WidgetStateProperty.all(Colors.indigo),
                     ),
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
+                    onPressed: () async {
+                      bool success = await _submit();
+                      if (success) {
                         showDialog(
                           context: context,
                           builder: (context) {
@@ -231,10 +295,14 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                                     Text('Type: $_type'),
                                     Text('Thumbnail: $_thumbnail'),
                                     Text('Link: $_link'),
-                                    Text('Maintenance Status: $_maintenanceStatus'),
-                                    Text('Development Status: $_developmentStatus')
+                                    Text(
+                                      'Maintenance Status: $_maintenanceStatus',
+                                    ),
+                                    Text(
+                                      'Development Status: $_developmentStatus',
+                                    ),
                                   ],
-                                )
+                                ),
                               ),
                               actions: [
                                 TextButton(
@@ -257,7 +325,6 @@ class _ProjectFormPageState extends State<ProjectFormPage> {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
